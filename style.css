@@ -1,4 +1,17 @@
-.WIP {
+/* 
+. -> class
+# -> ID 
+*/
+
+html,
+body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* .WIP {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,4 +24,50 @@
 #countdown {
     color: antiquewhite;
     font-size: 30px;
+} */
+
+.main {
+    background-color: #62b753;
+    background-image: url("images/maison.jpg");
+    height: 100vh;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#darkFilter {
+    position: absolute;
+    background: black;
+    opacity: 0.95;
+    transition: opacity 4s ease;
+    z-index: 2;
+    inset: 0;
+}
+
+#candle {
+    position: absolute;
+    width: 100px;
+    left: 30%;
+    bottom: 15%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+#match {
+    position: absolute;
+    width: 80px;
+    right: 10%;
+    bottom: 25%;
+    z-index: 4;
+    cursor: grab;
+    touch-action: none;
+}
+
+#match.dragging {
+    cursor: grabbing;
+}
+
+.hidden {
+    display: none;
+    pointer-events: none;
 }

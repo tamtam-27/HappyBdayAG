@@ -1,3 +1,71 @@
+const match = document.getElementById("match");
+const candle = document.getElementById("candle");
+const darkFilter = document.getElementById("darkFilter");
+
+let dragging = false;
+
+match.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    match.setPointerCapture(e.pointerId);
+    match.style.cursor = "grabbing";
+});
+
+match.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+
+    match.style.left = e.clientX - match.offsetWidth / 2 + "px";
+    match.style.top = e.clientY - match.offsetHeight / 2 + "px";
+    match.style.bottom = "auto";
+
+    if (isMatchInCandleMiddle(match, candle)) {
+        lightCandle();
+    }
+});
+
+match.addEventListener("pointerup", () => {
+    dragging = false;
+    match.style.cursor = "grab";
+});
+
+function isMatchInCandleMiddle(match, candle) {
+    const matchRect = match.getBoundingClientRect();
+    const candleRect = candle.getBoundingClientRect();
+
+    const matchCenterX = matchRect.left + matchRect.width / 2;
+    const matchCenterY = matchRect.top + matchRect.height / 2;
+
+    const candleMiddleLeft = candleRect.left + candleRect.width * 0.35;
+    const candleMiddleRight = candleRect.left + candleRect.width * 0.65;
+    const candleMiddleTop = candleRect.top + candleRect.height * 0.25;
+    const candleMiddleBottom = candleRect.top + candleRect.height * 0.55;
+
+    return (
+        matchCenterX >= candleMiddleLeft &&
+        matchCenterX <= candleMiddleRight &&
+        matchCenterY >= candleMiddleTop &&
+        matchCenterY <= candleMiddleBottom
+    );
+}
+
+function lightCandle() {
+    dragging = false;
+
+    candle.src = "images/candle_lit.png";
+    match.style.pointerEvents = "none";
+
+    setTimeout(() => {
+        darkFilter.style.opacity = "0";
+    }, 1000);
+
+    setTimeout(() => {
+        match.classList.add("hidden");
+        candle.classList.add("hidden");
+    }, 5000);
+}
+
+
+
+
 function fireworks() {
     if (typeof confetti !== 'function') {
         return;
