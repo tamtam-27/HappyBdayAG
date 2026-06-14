@@ -1,6 +1,14 @@
 const match = document.getElementById("match");
 const candle = document.getElementById("candle");
 const darkFilter = document.getElementById("darkFilter");
+const fairy = document.getElementById("fairy");
+const fairyTextBox = document.getElementById("fairy-textbox");
+const fairyText = document.getElementById("fairy-text");
+const basket = document.getElementById("basket");
+const items = document.querySelectorAll(".collect");
+
+let dialogueStep = 0;
+let collectedItems = 0;
 
 let dragging = false;
 
@@ -60,11 +68,97 @@ function lightCandle() {
     setTimeout(() => {
         match.classList.add("hidden");
         candle.classList.add("hidden");
+        showFairyDialogue();
     }, 5000);
 }
 
+function showFairyDialogue() {
+    fairy.classList.remove("hidden");
+    fairyTextBox.classList.remove("hidden");
+    fairyText.textContent = "Greetings, dear traveller!"; //before 1
+    dialogueStep = 1;
+}
 
+fairyTextBox.addEventListener("click", () => {
+    if (dialogueStep === 1) {
+        fairyText.textContent = "I am so glad that you came across here.\b You see, my little friend over there has lost some of their ingredients."; //before 2
+        dialogueStep = 2;
+    } else if (dialogueStep === 2) {
+        fairyText.textContent = "Can you help them? \b Drag all items into the basket."; //before 2
+        dialogueStep = 3;
+    } else if (dialogueStep === 3) {
+        fairy.classList.add("hidden");
+        fairyTextBox.classList.add("hidden");
+        showBasketTask();
+    } else if (dialogueStep === 4) {
+        fairyText.textContent = "Oh shit."; //after 4
+    }
+});
 
+function showBasketTask() {
+    basket.classList.remove("hidden");
+
+    items.forEach(item => {
+        item.classList.remove("hidden");
+        makeDraggable(item);
+    });
+}
+
+function makeDraggable(item) {
+    let isDraggingItem = false;
+
+    item.addEventListener("pointerdown", (e) => {
+        isDraggingItem = true;
+        item.setPointerCapture(e.pointerId);
+        item.style.cursor = "grabbing";
+    });
+
+    item.addEventListener("pointermove", (e) => {
+        if (!isDraggingItem) return;
+
+        item.style.left = e.clientX - item.offsetWidth / 2 + "px";
+        item.style.top = e.clientY - item.offsetHeight / 2 + "px";
+
+        if (isItemInBasket(item, basket)) {
+            collectItem(item);
+            isDraggingItem = false;
+        }
+    });
+
+    item.addEventListener("pointerup", () => {
+        isDraggingItem = false;
+        item.style.cursor = "grab";
+    });
+}
+function isItemInBasket(item, basket) {
+    const itemRect = item.getBoundingClientRect();
+    const basketRect = basket.getBoundingClientRect();
+
+    const itemCenterX = itemRect.left + itemRect.width / 2;
+    const itemCenterY = itemRect.top + itemRect.height / 2;
+
+    return (
+        itemCenterX >= basketRect.left &&
+        itemCenterX <= basketRect.right &&
+        itemCenterY >= basketRect.top &&
+        itemCenterY <= basketRect.bottom
+    );
+}
+
+function collectItem(item) {
+    item.classList.add("hidden");
+    item.style.pointerEvents = "none";
+    collectedItems++;
+
+    if (collectedItems === items.length) {
+        document.querySelector(".main").style.backgroundImage = 'url("images/maison_happy.jpg")';
+        basket.classList.add("hidden");
+        fairy.classList.remove("hidden");
+        fairyTextBox.classList.remove("hidden");
+        fairyText.textContent = "Thank you so much! Now my friend can happily continue with their–"; //after 3
+        dialogueStep = 4;
+    }
+}
 
 function fireworks() {
     if (typeof confetti !== 'function') {

@@ -27,7 +27,7 @@ body {
 } */
 
 .main {
-    background-color: #62b753;
+    background-color: #51944691;
     background-image: url("images/maison.jpg");
     height: 100vh;
     background-position: center;
@@ -45,6 +45,7 @@ body {
 }
 
 #candle {
+    color: crimson;
     position: absolute;
     width: 100px;
     left: 30%;
@@ -54,6 +55,7 @@ body {
 }
 
 #match {
+    color: crimson;
     position: absolute;
     width: 80px;
     right: 10%;
@@ -67,7 +69,82 @@ body {
     cursor: grabbing;
 }
 
+
+#fairy {
+    position: absolute;
+    left: -15%;
+    width: 220px;
+    bottom: 12%;
+    z-index: 5;
+}
+
+#fairy-textbox {
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    transform: translateX(-50%);
+    width: 75%;
+    padding: 20px;
+    background: rgba(255, 245, 220, 0.9);
+    border: 3px solid #5a3b25;
+    border-radius: 18px;
+    z-index: 4;
+    cursor: pointer;
+}
+
+#fairy-text {
+    position: relative;
+    color: deeppink;
+    z-index: 6;
+    font-size: 18px;
+    text-align: right;
+    width: 75%;
+    margin-left: auto;
+}
+
+#basket {
+    position: absolute;
+    width: 150px;
+    left: 35%;
+    bottom: 10%;
+    z-index: 6;
+}
+
+#ivy {
+    width: 90px;
+    left: 55%;
+    top: 9%;
+}
+
+
+#mushroom {
+    width: 50px;
+    left: 26%;
+    top: 49%;
+}
+
+#hibiscus {
+    width: 50px;
+    left: 84%;
+    top: 67%;
+}
+
+#root {
+    width: 55px;
+    left: 15%;
+    top: 71%;
+}
+
+
 .hidden {
     display: none;
     pointer-events: none;
+}
+
+.collect {
+    position: absolute;
+    width: 80px;
+    z-index: 7;
+    cursor: grab;
+    touch-action: none;
 }
