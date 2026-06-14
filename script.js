@@ -6,6 +6,8 @@ const fairyTextBox = document.getElementById("fairy-textbox");
 const fairyText = document.getElementById("fairy-text");
 const basket = document.getElementById("basket");
 const items = document.querySelectorAll(".collect");
+const fadeOverlay = document.getElementById("fadeOverlay");
+const chars = document.querySelectorAll(".chars");
 
 let dialogueStep = 0;
 let collectedItems = 0;
@@ -75,23 +77,40 @@ function lightCandle() {
 function showFairyDialogue() {
     fairy.classList.remove("hidden");
     fairyTextBox.classList.remove("hidden");
-    fairyText.textContent = "Greetings, dear traveller!"; //before 1
+    fairyText.textContent = "Hello, I am glad you found the way."; //before 1
     dialogueStep = 1;
 }
 
 fairyTextBox.addEventListener("click", () => {
     if (dialogueStep === 1) {
-        fairyText.textContent = "I am so glad that you came across here.\b You see, my little friend over there has lost some of their ingredients."; //before 2
+        fairyText.textContent = "We still have to collect some things for the prince before we can get going."; //before 2
         dialogueStep = 2;
     } else if (dialogueStep === 2) {
-        fairyText.textContent = "Can you help them? \b Drag all items into the basket."; //before 2
+        fairyText.textContent = "Can you drag all the items into the basket for us?"; //before 3
         dialogueStep = 3;
     } else if (dialogueStep === 3) {
         fairy.classList.add("hidden");
         fairyTextBox.classList.add("hidden");
         showBasketTask();
     } else if (dialogueStep === 4) {
-        fairyText.textContent = "Oh shit."; //after 4
+        fairyText.textContent = "Now onto our way to New Haven!"; //after 5
+        setTimeout(() => {
+            fadeOverlay.classList.add("fade-out");
+            setTimeout(() => {
+                document.querySelector(".main").style.backgroundImage = 'url("images/forest_village.jpg")';
+                fadeOverlay.classList.remove("fade-out");
+            }, 2000);
+        }, 1000);
+        dialogueStep = 5;
+    } else if (dialogueStep === 5) {
+        fairyText.textContent = "There's the prince! But who is that next to him?" //later 6
+        dialogueStep = 6;
+    } else if (dialogueStep === 6) {
+        fairy.classList.add("hidden");
+        fairyTextBox.classList.add("hidden");
+        revealChars();
+    } else if (dialogueStep === 7) {
+
     }
 });
 
@@ -155,9 +174,16 @@ function collectItem(item) {
         basket.classList.add("hidden");
         fairy.classList.remove("hidden");
         fairyTextBox.classList.remove("hidden");
-        fairyText.textContent = "Thank you so much! Now my friend can happily continue with their–"; //after 3
+        fairyText.textContent = "Thank you so much! I wonder what he needs these things for..."; //after 4
         dialogueStep = 4;
     }
+}
+
+function revealChars() {
+    chars.forEach(char => {
+        char.classList.remove("hidden");
+    })
+    dialogueStep = 7;
 }
 
 function fireworks() {

@@ -114,6 +114,7 @@ body {
     width: 90px;
     left: 55%;
     top: 9%;
+    opacity: 0.6;
 }
 
 
@@ -121,20 +122,43 @@ body {
     width: 50px;
     left: 26%;
     top: 49%;
+    opacity: 0.7;
 }
 
 #hibiscus {
     width: 50px;
     left: 84%;
     top: 67%;
+    opacity: 0.6;
 }
 
 #root {
-    width: 55px;
-    left: 15%;
-    top: 71%;
+    width: 40px;
+    left: 88%;
+    top: 58%;
+    opacity: 0.6;
 }
 
+#moss {
+    width: 70px;
+    left: 15%;
+    top: 68%;
+    opacity: 0.5;
+}
+
+#cas {
+    width: 230px;
+    left: 50%;
+    top: 50%;
+    z-index: 40;
+}
+
+#poppy {
+    width: 230px;
+    left: -1%;
+    top: 50%;
+    z-index: 39;
+}
 
 .hidden {
     display: none;
@@ -147,4 +171,22 @@ body {
     z-index: 7;
     cursor: grab;
     touch-action: none;
+}
+
+.chars {
+    position: absolute;
+}
+
+#fadeOverlay {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    transition: opacity 2s ease;
+}
+
+#fadeOverlay.fade-out {
+    opacity: 1;
 }
