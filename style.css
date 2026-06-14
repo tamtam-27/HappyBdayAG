@@ -30,7 +30,7 @@ body {
     position: relative;
     background-color: black;
     background-image: url("images/maison.jpg");
-    height: 100vh;
+    height: 100dvh;
     background-position: center;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -176,6 +176,38 @@ body {
 
 .chars {
     position: absolute;
+}
+
+#chars-textbox {
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    transform: translateX(-50%);
+    width: 75%;
+    padding: 20px;
+    background: rgba(255, 245, 220, 0.9);
+    border: 3px solid #5a3b25;
+    border-radius: 18px;
+    z-index: 44;
+    cursor: pointer;
+}
+
+#poppy-text {
+    position: relative;
+    color: darkred;
+    z-index: 45;
+    font-size: 18px;
+    text-align: right;
+    margin-left: auto;
+}
+
+#cas-text {
+    position: relative;
+    color: black;
+    z-index: 45;
+    font-size: 18px;
+    text-align: right;
+    margin-left: auto;
 }
 
 #fadeOverlay {
