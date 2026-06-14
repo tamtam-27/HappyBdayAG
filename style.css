@@ -27,7 +27,8 @@ body {
 } */
 
 .main {
-    background-color: #51944691;
+    position: relative;
+    background-color: black;
     background-image: url("images/maison.jpg");
     height: 100vh;
     background-position: center;
@@ -148,15 +149,15 @@ body {
 
 #cas {
     width: 230px;
-    left: 50%;
-    top: 50%;
+    left: 49%;
+    top: 48%;
     z-index: 40;
 }
 
 #poppy {
     width: 230px;
-    left: -1%;
-    top: 50%;
+    left: -2%;
+    top: 48%;
     z-index: 39;
 }
 
