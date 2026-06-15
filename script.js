@@ -2,12 +2,29 @@ const match = document.getElementById("match");
 const candle = document.getElementById("candle");
 const darkFilter = document.getElementById("darkFilter");
 const fairy = document.getElementById("fairy");
-const fairyTextBox = document.getElementById("fairy-textbox");
+const textBox = document.getElementById("textbox");
 const fairyText = document.getElementById("fairy-text");
 const basket = document.getElementById("basket");
 const items = document.querySelectorAll(".collect");
 const fadeOverlay = document.getElementById("fadeOverlay");
 const chars = document.querySelectorAll(".chars");
+const arrow = document.getElementById("arrow");
+const casText = document.getElementById("cas-text");
+const poppyText = document.getElementById("poppy-text");
+const cake = document.getElementById("cake");
+const happybday = document.getElementById("happybday");
+const darkenOverlay = document.getElementById("darkenOverlay");
+const counter = document.getElementById("countdown");
+
+const autoDialogue = [
+    { char: "cas", text: "Hello, welcome to Hew Haven." },
+    { char: "cas", text: "I don't know if you have heard it already but this is my future wife Penellaphe." },
+    { char: "poppy", text: "I still haven't agreed to that." },
+    { char: "cas", text: "You will, princess." },
+    { char: "poppy", text: "Don't listen to him." },
+    { char: "poppy", text: "Anyway, welcome. We have been expecting you." },
+    { char: "poppy", text: "We heard it was your special day so we have prepared a little something for you." },
+]
 
 let dialogueStep = 0;
 let collectedItems = 0;
@@ -76,12 +93,12 @@ function lightCandle() {
 
 function showFairyDialogue() {
     fairy.classList.remove("hidden");
-    fairyTextBox.classList.remove("hidden");
+    textBox.classList.remove("hidden");
     fairyText.textContent = "Hello, I am glad you found the way."; //before 1
     dialogueStep = 1;
 }
 
-fairyTextBox.addEventListener("click", () => {
+arrow.addEventListener("click", () => {
     if (dialogueStep === 1) {
         fairyText.textContent = "We still have to collect some things for the prince before we can get going."; //before 2
         dialogueStep = 2;
@@ -90,15 +107,19 @@ fairyTextBox.addEventListener("click", () => {
         dialogueStep = 3;
     } else if (dialogueStep === 3) {
         fairy.classList.add("hidden");
-        fairyTextBox.classList.add("hidden");
+        textBox.classList.add("hidden");
         showBasketTask();
     } else if (dialogueStep === 4) {
         fairyText.textContent = "Now onto our way to New Haven!"; //after 5
+        arrow.classList.add("hidden");
         setTimeout(() => {
             fadeOverlay.classList.add("fade-out");
             setTimeout(() => {
                 document.querySelector(".main").style.backgroundImage = 'url("images/forest_village.jpg")';
                 fadeOverlay.classList.remove("fade-out");
+                setTimeout(() => {
+                    arrow.classList.remove("hidden");
+                }, 2000);
             }, 2000);
         }, 1000);
         dialogueStep = 5;
@@ -107,12 +128,38 @@ fairyTextBox.addEventListener("click", () => {
         dialogueStep = 6;
     } else if (dialogueStep === 6) {
         fairy.classList.add("hidden");
-        fairyTextBox.classList.add("hidden");
+        fairyText.classList.add("hidden");
+        textBox.classList.add("hidden");
         revealChars();
     } else if (dialogueStep === 7) {
+        arrow.classList.add("hidden");
+        textBox.classList.add("hidden");
+        poppyText.classList.add("hidden");
 
+        darkenOverlay.classList.remove("hidden");
+
+        setTimeout(() => {
+            darkenOverlay.classList.add("active");
+        }, 20);
+
+        cake.classList.remove("hidden");
+        happybday.classList.remove("hidden");
+
+        setTimeout(() => {
+            cake.classList.add("float-down");
+            happybday.classList.add("float-down");
+            fireworks();
+        }, 50);
+        setTimeout(() => {
+            fireworks();
+        }, 1500);
+        textBox.classList.remove("hidden");
+        counter.classList.remove("hidden");
+
+        dialogueStep = 8;
     }
 });
+
 
 function showBasketTask() {
     basket.classList.remove("hidden");
@@ -173,7 +220,7 @@ function collectItem(item) {
         document.querySelector(".main").style.backgroundImage = 'url("images/maison_happy.jpg")';
         basket.classList.add("hidden");
         fairy.classList.remove("hidden");
-        fairyTextBox.classList.remove("hidden");
+        textBox.classList.remove("hidden");
         fairyText.textContent = "Thank you so much! I wonder what he needs these things for..."; //after 4
         dialogueStep = 4;
     }
@@ -182,8 +229,50 @@ function collectItem(item) {
 function revealChars() {
     chars.forEach(char => {
         char.classList.remove("hidden");
-    })
-    dialogueStep = 7;
+    });
+    setTimeout(() => {
+        startAutoDialogue();
+    }, 1000);
+}
+
+function startAutoDialogue() {
+    let index = 0;
+
+    textBox.classList.remove("hidden");
+    arrow.classList.add("hidden");
+
+    fairyText.classList.add("hidden");
+    casText.classList.add("hidden");
+    poppyText.classList.add("hidden");
+
+    showNextAutoLine();
+
+    function showNextAutoLine() {
+        if (index >= autoDialogue.length) {
+            arrow.classList.remove("hidden");
+            dialogueStep = 7;
+            return;
+        }
+
+        const line = autoDialogue[index];
+
+        casText.classList.add("hidden");
+        poppyText.classList.add("hidden");
+
+        if (line.char === "cas") {
+            casText.textContent = line.text;
+            casText.classList.remove("hidden");
+        }
+
+        if (line.char === "poppy") {
+            poppyText.textContent = line.text;
+            poppyText.classList.remove("hidden");
+        }
+
+        index++;
+
+        setTimeout(showNextAutoLine, 2500);
+    }
 }
 
 function fireworks() {
@@ -193,7 +282,7 @@ function fireworks() {
 
     const duration = 4 * 1000;
     const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 50 };
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
     }
@@ -219,7 +308,7 @@ function fireworks() {
 };
 
 function countdownMeet() {
-    var endDate = new Date("June 15, 2026 00:00:00").getTime();
+    var endDate = new Date("June 20, 2026 16:00:00").getTime();
     var x = setInterval(function () {
         var now = new Date().getTime();
         var distance = endDate - now;
@@ -237,5 +326,4 @@ function countdownMeet() {
     }, 1000);
 };
 
-window.addEventListener('load', fireworks);
 window.addEventListener('load', countdownMeet);

@@ -1,8 +1,3 @@
-/* 
-. -> class
-# -> ID 
-*/
-
 html,
 body {
     overflow: hidden;
@@ -11,20 +6,12 @@ body {
     padding: 0;
 }
 
-/* .WIP {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 100dvh;
-    gap: 15px;
-}
-
 #countdown {
-    color: antiquewhite;
+    color: deeppink;
     font-size: 30px;
-} */
+    text-align: center;
+    z-index: 100;
+}
 
 .main {
     position: relative;
@@ -79,7 +66,7 @@ body {
     z-index: 5;
 }
 
-#fairy-textbox {
+#textbox {
     position: absolute;
     left: 50%;
     bottom: 6%;
@@ -91,6 +78,15 @@ body {
     border-radius: 18px;
     z-index: 4;
     cursor: pointer;
+    text-align: right;
+}
+
+#arrow {
+    position: absolute;
+    height: 10px;
+    z-index: 100;
+    right: 2%;
+    bottom: 6%;
 }
 
 #fairy-text {
@@ -107,7 +103,7 @@ body {
     position: absolute;
     width: 150px;
     left: 35%;
-    bottom: 10%;
+    bottom: 6%;
     z-index: 6;
 }
 
@@ -151,14 +147,42 @@ body {
     width: 230px;
     left: 49%;
     top: 48%;
-    z-index: 40;
+    z-index: 3;
 }
 
 #poppy {
     width: 230px;
     left: -2%;
     top: 48%;
-    z-index: 39;
+    z-index: 2;
+}
+
+#cake {
+    position: absolute;
+    width: 200px;
+    left: 50%;
+    top: -300px;
+    transform: translateX(-50%);
+    z-index: 30;
+    transition: top 4s ease;
+}
+
+#cake.float-down {
+    top: 35%;
+}
+
+#happybday {
+    position: absolute;
+    width: 350px;
+    left: 50%;
+    top: -300px;
+    transform: translateX(-50%);
+    z-index: 30;
+    transition: top 4s ease;
+}
+
+#happybday.float-down {
+    top: 13%;
 }
 
 .hidden {
@@ -178,26 +202,12 @@ body {
     position: absolute;
 }
 
-#chars-textbox {
-    position: absolute;
-    left: 50%;
-    bottom: 6%;
-    transform: translateX(-50%);
-    width: 75%;
-    padding: 20px;
-    background: rgba(255, 245, 220, 0.9);
-    border: 3px solid #5a3b25;
-    border-radius: 18px;
-    z-index: 44;
-    cursor: pointer;
-}
-
 #poppy-text {
     position: relative;
     color: darkred;
     z-index: 45;
     font-size: 18px;
-    text-align: right;
+    text-align: left;
     margin-left: auto;
 }
 
@@ -222,4 +232,18 @@ body {
 
 #fadeOverlay.fade-out {
     opacity: 1;
+}
+
+#darkenOverlay {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+#darkenOverlay.active {
+    opacity: 0.35;
 }
