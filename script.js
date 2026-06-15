@@ -19,7 +19,7 @@ const book = document.getElementById("book");
 
 const autoDialogue = [
     { char: "cas", text: "Hello, welcome to New Haven." },
-    { char: "cas", text: "I don't know if you have heard it already but this is my future wife Penellaphe." },
+    { char: "cas", text: "I don't know if you've heard it already but this is my future wife Penellaphe." },
     { char: "poppy", text: "I still haven't agreed to that." },
     { char: "cas", text: "You will, princess." },
     { char: "poppy", text: "Don't listen to him." },
@@ -275,7 +275,7 @@ function startAutoDialogue() {
 
         index++;
 
-        setTimeout(showNextAutoLine, 2500);
+        setTimeout(showNextAutoLine, 3000);
     }
 }
 
