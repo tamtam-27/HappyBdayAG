@@ -144,15 +144,15 @@ body {
 }
 
 #cas {
-    width: 230px;
+    width: 240px;
     left: 49%;
     top: 48%;
     z-index: 3;
 }
 
 #poppy {
-    width: 230px;
-    left: -2%;
+    width: 240px;
+    left: -3%;
     top: 48%;
     z-index: 2;
 }
@@ -182,7 +182,7 @@ body {
 }
 
 #happybday.float-down {
-    top: 13%;
+    top: 10%;
 }
 
 .hidden {
@@ -246,4 +246,14 @@ body {
 
 #darkenOverlay.active {
     opacity: 0.35;
+}
+
+#book {
+    position: absolute;
+    color: deeppink;
+    text-align: center;
+    bottom: 1.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
 }

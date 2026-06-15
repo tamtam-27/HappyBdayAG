@@ -15,9 +15,10 @@ const cake = document.getElementById("cake");
 const happybday = document.getElementById("happybday");
 const darkenOverlay = document.getElementById("darkenOverlay");
 const counter = document.getElementById("countdown");
+const book = document.getElementById("book");
 
 const autoDialogue = [
-    { char: "cas", text: "Hello, welcome to Hew Haven." },
+    { char: "cas", text: "Hello, welcome to New Haven." },
     { char: "cas", text: "I don't know if you have heard it already but this is my future wife Penellaphe." },
     { char: "poppy", text: "I still haven't agreed to that." },
     { char: "cas", text: "You will, princess." },
@@ -94,7 +95,7 @@ function lightCandle() {
 function showFairyDialogue() {
     fairy.classList.remove("hidden");
     textBox.classList.remove("hidden");
-    fairyText.textContent = "Hello, I am glad you found the way."; //before 1
+    fairyText.textContent = "Hello! You are a bit early."; //before 1
     dialogueStep = 1;
 }
 
@@ -103,7 +104,7 @@ arrow.addEventListener("click", () => {
         fairyText.textContent = "We still have to collect some things for the prince before we can get going."; //before 2
         dialogueStep = 2;
     } else if (dialogueStep === 2) {
-        fairyText.textContent = "Can you drag all the items into the basket for us?"; //before 3
+        fairyText.textContent = "Could you drag all the items into the basket for us?"; //before 3
         dialogueStep = 3;
     } else if (dialogueStep === 3) {
         fairy.classList.add("hidden");
@@ -148,18 +149,21 @@ arrow.addEventListener("click", () => {
         setTimeout(() => {
             cake.classList.add("float-down");
             happybday.classList.add("float-down");
-            fireworks();
         }, 50);
         setTimeout(() => {
             fireworks();
-        }, 1500);
-        textBox.classList.remove("hidden");
-        counter.classList.remove("hidden");
+        }, 1000);
+        setTimeout(() => {
+            textBox.classList.remove("hidden");
+            counter.classList.remove("hidden");
+        }, 3000);
+        setTimeout(() => {
+            book.classList.remove("hidden");
+        }, 4000);
 
         dialogueStep = 8;
     }
 });
-
 
 function showBasketTask() {
     basket.classList.remove("hidden");
@@ -221,7 +225,7 @@ function collectItem(item) {
         basket.classList.add("hidden");
         fairy.classList.remove("hidden");
         textBox.classList.remove("hidden");
-        fairyText.textContent = "Thank you so much! I wonder what he needs these things for..."; //after 4
+        fairyText.textContent = "Thank you so much! What a weird combination of things. I wonder what he needs them for..."; //after 4
         dialogueStep = 4;
     }
 }
